@@ -1,0 +1,39 @@
+name: github.com/opspec-pkgs/dir.list-contents
+description: lists contents of a directory
+version: 1.0.0
+inputs:
+  dir:
+    dir:
+      description: directory from which contents will be listed
+      default: .
+  recursive:
+    string:
+      constraints: { enum: ['true', 'false']}
+      default: 'false'
+      description: when true, recursively lists contents from child directories as well
+outputs:
+  contentList:
+    array:
+      constraints:
+        items:
+          properties:
+            path:
+              description: path of the content
+            isDir:
+              description: if content is a directory
+            modTime:
+              description: time the content was last modified (in milliseconds since POSIX epoch)
+          required: [ path ]
+      description: array of content stats
+run:
+  container:
+    image: { ref: 'node:9.5.0-alpine' }
+    cmd: [ node, /cmd.js ]
+    envVars:
+      recursive:
+    dirs:
+      /dir: $(dir)
+    files:
+      /cmd.js:
+      /contentList: $(contentList)
+    workDir: /dir
