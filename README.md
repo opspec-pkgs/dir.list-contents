@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/opspec-pkgs/dir.list-contents.svg?branch=master)](https://travis-ci.org/opspec-pkgs/dir.list-contents)
 
-
 # Problem statement
 
 lists contents of a directory
